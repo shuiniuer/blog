@@ -8,5 +8,5 @@ dist/
 _site/*
 *.orig
 buildConf.json
-/.idea/
-/.idea/*
+.idea/
+.idea/*
