@@ -65,7 +65,6 @@
 
 - 删除远程标签：
 `git tag -d <tagname>`
-
 `git push origin :refs/tags/<tagname>`
 
 ## 配置
