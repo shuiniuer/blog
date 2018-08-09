@@ -25,27 +25,32 @@
 - 赋值给变量
 
 ```
-let isBig = function(animal) {
-    return animal.age > 5;
+let bigger = function(x) {
+    return x > 5;
 }
 ```
 
 - 当参数传递
 
 ```
-function isBig(animal) {
-    return animal.age > 6;
+function play(fn){
+	fn.call({name: 'shuiniuer'});
 }
-animals.filter(isBig);
+
+function swim(){
+	console.log(this.name+' is swimming!');
+}
+
+play(swim);
 
 ```
 
 - 作为返回值
 
 ```
-function isBigProducer(compare){
-	return function(animal){
-		return animal.age > compare;
+function say(who){
+	return function(words){
+		return who + ' said '+ words +'!';
 	}
 }
 ```
