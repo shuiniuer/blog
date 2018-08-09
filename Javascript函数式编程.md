@@ -292,7 +292,7 @@ judgeProducer('sex')('male')(animal);
 
 个人理解：<br>
 **柯里化是指这样一个函数(假设叫做createCurry)，他接收函数A作为参数，运行后能够返回一个新的函数。并且这个新的函数能够处理函数A的剩余参数。<br>
-新的函数只传递给函数一部分参数来调用它，让它返回一个函数去处理剩下的参数。**
+新的函数可以只传递给函数一部分参数来调用它，让它返回一个函数去处理剩下的参数。**
 
 ```
 let curry = require('lodash').curry;
@@ -309,11 +309,8 @@ animals
 .filter(judge('age')(5));
 ```
 
-### 柯里化的用处：
-
-- 提高适用性
-
-【通用函数】解决了兼容性问题，但同时也会再来，使用的不便利性，不同的应用场景往，要传递很多参数，以达到解决特定问题的目的。有时候应用中，同一种规则可能会反复使用，这就可能会造成代码的重复性。
+### 常见作用
+- 参数复用
 
 ```
 function square(i) {
@@ -366,15 +363,55 @@ mapSQ([6, 7, 8, 9, 10]);
 mapSQ([10, 20, 30, 40, 50]);
 // ......
 
-var mapDB = cmap(dubble);
+let mapDB = cmap(dubble);
 mapDB([1, 2, 3, 4, 5]);
 mapDB([6, 7, 8, 9, 10]);
 mapDB([10, 20, 30, 40, 50]);
 // ......
 ```
 
-- 延迟执行：不断的柯里化，累积传入的参数，最后执行。
-- 固定易变因素：提前把易变因素，传参固定下来，生成一个更明确的应用函数。
+- 延迟执行
+
+```
+const add = (...args) => args.reduce((a, b) => a + b);
+
+const sum = currying(add);
+
+sum(1,2)(3);
+sum(4);
+sum(); // 10
+```
+
+- 动态创建函数
+
+例如兼容现代浏览器和IE浏览器的添加事件方法，我们通常会这样写：
+
+```
+const addEvent = function (elem, type, fn, cature) {
+    if (window.addEventListener) {
+        elem.addEventListener(type, (e) => fn.call(elem, e), capture);
+    } else if (window.attachEvent) {
+        elem.attachEvent('on' + type, (e) => fn.call(elem, e);
+    }
+}
+```
+
+这种方法显然有个问题，就是每次添加事件处理都要执行一遍`if {...} else if {...}`。其实用下面的方法只需判断一次即可：
+
+```
+const addEvent = (function () {
+    if (window.addEventListener) {
+        return (elem, type, fn, capture) => {
+            elem.addEventListener(type, (e) => fn.call(elem, e), capture);
+        };
+    } else {
+        return (elem, type, fn, capture) => {
+            elem.attachEvent('on' + type, (e) => fn.call(elem, e);
+        };
+    }
+})();
+```
+这个例子，第一次`if {...} else if {...}`判断之后，完成了部分计算，动态创建新的函数来处理后面传入的参数，以后就不必重新进行计算了。这是一个典型的柯里化的应用。
 
 >当我们谈论纯函数的时候，我们说它们接受一个输入返回一个输出。curry 函数所做的正是这样：每传递一个参数调用函数，就返回一个新函数处理剩余的参数。这就是一个输入对应一个输出。<br>
 哪怕输出是另一个函数，它也是纯函数。当然 curry 函数也允许一次传递多个参数，但这只是出于减少 () 的方便。
