@@ -301,6 +301,71 @@ function currying(fn) {
 }
 ```
 
+#### 柯里化的用处：
+
+- 提高适用性
+
+【通用函数】解决了兼容性问题，但同时也会再来，使用的不便利性，不同的应用场景往，要传递很多参数，以达到解决特定问题的目的。有时候应用中，同一种规则可能会反复使用，这就可能会造成代码的重复性。
+
+```
+function square(i) {
+    return i * i;
+}
+
+function dubble(i) {
+    return i *= 2;
+}
+
+function map(handeler, list) {
+    return list.map(handeler);
+}
+
+// 数组的每一项平方
+map(square, [1, 2, 3, 4, 5]);
+map(square, [6, 7, 8, 9, 10]);
+map(square, [10, 20, 30, 40, 50]);
+// ......
+
+// 数组的每一项加倍
+map(dubble, [1, 2, 3, 4, 5]);
+map(dubble, [6, 7, 8, 9, 10]);
+map(dubble, [10, 20, 30, 40, 50]);
+```
+
+例子中，创建了一个map通用函数，用于适应不同的应用场景。显然，通用性不用怀疑。同时，例子中重复传入了相同的处理函数：square和dubble。
+
+应用中这种可能会更多。当然，通用性的增强必然带来适用性的减弱。但是，我们依然可以在中间找到一种平衡。
+
+看下面，我们利用柯里化改造一下：
+
+```
+function square(i) {
+    return i * i;
+}
+
+function dubble(i) {
+    return i *= 2;
+}
+
+function map(handeler, list) {
+    return list.map(handeler);
+}
+
+var mapSQ = currying(map, square);
+mapSQ([1, 2, 3, 4, 5]);
+mapSQ([6, 7, 8, 9, 10]);
+mapSQ([10, 20, 30, 40, 50]);
+// ......
+
+var mapDB = currying(map, dubble);
+mapDB([1, 2, 3, 4, 5]);
+mapDB([6, 7, 8, 9, 10]);
+mapDB([10, 20, 30, 40, 50]);
+// ......
+```
+- 延迟执行：不断的柯里化，累积传入的参数，最后执行。
+- 固定易变因素：提前把易变因素，传参固定下来，生成一个更明确的应用函数。
+
 ## 后续
 
 - 组合（composing）
