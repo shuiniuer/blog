@@ -288,19 +288,6 @@ judge('sex')('male')(animal);
 顾名思义，柯里化其实本身是固定一个可以预期的参数，并返回一个特定的函数，处理批特定的需求。这增加了函数的适用性，但同时也降低了函数的适用范围。<br><br>
 个人理解：**柯里化是指这样一个函数(假设叫做createCurry)，他接收函数A作为参数，运行后能够返回一个新的函数。并且这个新的函数能够处理函数A的剩余参数。**
 
-- 柯里化通用实现
-
-```
-function currying(fn) {
-    var slice = Array.prototype.slice,
-    __args = slice.call(arguments, 1);
-    return function () {
-        var __inargs = slice.call(arguments);
-        return fn.apply(null, __args.concat(__inargs));
-    };
-}
-```
-
 #### 柯里化的用处：
 
 - 提高适用性
@@ -351,13 +338,14 @@ function map(handeler, list) {
     return list.map(handeler);
 }
 
-var mapSQ = currying(map, square);
+let cmap = currying(map);
+let mapSQ = cmap(square);
 mapSQ([1, 2, 3, 4, 5]);
 mapSQ([6, 7, 8, 9, 10]);
 mapSQ([10, 20, 30, 40, 50]);
 // ......
 
-var mapDB = currying(map, dubble);
+var mapDB = cmap(dubble);
 mapDB([1, 2, 3, 4, 5]);
 mapDB([6, 7, 8, 9, 10]);
 mapDB([10, 20, 30, 40, 50]);
