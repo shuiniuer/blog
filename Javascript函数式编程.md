@@ -108,7 +108,7 @@ let checkAge = function(age) {
 面向对象语言的问题是，它们永远都要随身携带那些隐式的环境。你只需要一个香蕉，但却得到一个拿着香蕉的大猩猩...以及整个丛林。
 
 ## 实践出真知
-- 边撸边理解
+- 边撸代码边理解
 
 ```
 let animals = [
@@ -171,7 +171,7 @@ console.log(animals.filter(isBig5));
 console.log(animals.filter(isBig6));
 console.log(animals.filter(isBig7));
 
-// 上面每次都要定义function，不爽
+// 每次都要重新定义一个function，很不爽
 // 优化一下
 let standard = 4;
 let isBig = function(animal){
@@ -185,7 +185,7 @@ console.log(animals.filter(isBig));
 standard = 7;
 console.log(animals.filter(isBig));
 
-// 上面每次都要给standard重新赋值一下，不爽
+// 每次都要给standard重新赋值一下，不爽
 // 进一步优化
 let isBigProducer = function(standard){
 	return function(animal){
@@ -211,10 +211,9 @@ let isCat = function(animal){
 animals.filter(isBig5).filter(isMale).filter(isCat);
 ```
 
-- 需求不停变更，找出age、sex、species的不同组合
+- 根据age、sex、species的值的不同组合筛选animal
 
 ```
-// 抽象一下
 let judgeBigProducer = function(standard){
 	return function(animal){
 		return animal.age > standard;
@@ -237,8 +236,8 @@ animals
 .filter(judgeSexProducer('female'))
 .filter(judgeSpeciesProducer('dog'));
 
-// 终极抽象
-let judge = function(prop){
+// 优化
+let judgeProducer = function(prop){
 	return function(standard){
 		return function(animal){
 			if(prop==='age'){
@@ -251,16 +250,16 @@ let judge = function(prop){
 };
 
 animals
-.filter(judge('species')('dog'))
-.filter(judge('sex')('female'))
-.filter(judge('age')(5));
+.filter(judgeProducer('species')('dog'))
+.filter(judgeProducer('sex')('female'))
+.filter(judgeProducer('age')(5));
 
 ```
 ## 柯里化（curry）
-- 上面的终极抽象`judge`看着很蛋疼，有没有
 
 ```
-let judge = function(prop){
+// 这段代码看着总觉得别扭
+let judgeProducer = function(prop){
 	return function(standard){
 		return function(animal){
 			if(prop==='age'){
@@ -272,7 +271,7 @@ let judge = function(prop){
 	};
 };
 
-let judge2 = function(prop, standard, animal){
+let judgeProducer2 = function(prop, standard, animal){
 	if(prop==='age'){
 		return animal[prop] > standard;
 	}else{
@@ -281,17 +280,33 @@ let judge2 = function(prop, standard, animal){
 };
 
 let animal = {name:'dog3', species:'dog', age:5, sex:'male'};
-judge2('sex','male', animal);
-judge('sex')('male')(animal);
+judgeProducer2('sex','male', animal);
+judgeProducer('sex')('male')(animal);
 // 二者的作用是一样的
 // filter 方法只接受一个参数
-// judge2接受三个参数，需要转化为类似于judge这样的函数才能传入filter使用
+// judgeProducer2接受三个参数，需要转化为类似于judge这样的函数才能传入filter使用
 // 这就是柯里化（curry）
 
 ```
-在计算机科学中，柯里化（currying）是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术。<br>
-顾名思义，柯里化其实本身是固定一个可以预期的参数，并返回一个特定的函数，处理批特定的需求。这增加了函数的适用性，但同时也降低了函数的适用范围。<br><br>
+柯里化（Currying）是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回`接受余下的参数`且`返回结果`的`新函数`的技术。<br><br>
+
 个人理解：**柯里化是指这样一个函数(假设叫做createCurry)，他接收函数A作为参数，运行后能够返回一个新的函数。并且这个新的函数能够处理函数A的剩余参数。**
+
+```
+let curry = require('lodash').curry;
+let judge = curry(function(prop, standard, animal){
+	if(prop==='age'){
+		return animal[prop] > standard;
+	}else{
+		return animal[prop] === standard;
+	}
+});
+animals
+.filter(judge('species')('dog'))
+.filter(judge('sex')('female'))
+.filter(judge('age')(5));
+
+````
 
 ### 柯里化的用处：
 
