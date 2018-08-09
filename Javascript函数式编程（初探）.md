@@ -252,7 +252,7 @@ animals
 
 ```
 ## 柯里化（curry）
-- 下面这段代码看着很蛋疼，有没有
+- 上面的终极抽象`judge`看着很蛋疼，有没有
 
 ```
 let judge = function(prop){
@@ -267,7 +267,7 @@ let judge = function(prop){
 	};
 };
 
-let judgeProp2 = function(prop, standard, animal){
+let judge2 = function(prop, standard, animal){
 	if(prop==='age'){
 		return animal[prop] > standard;
 	}else{
