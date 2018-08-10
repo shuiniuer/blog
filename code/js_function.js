@@ -16,7 +16,5 @@ let animals = [
 
 // 1、找出 age>5 的 animal
 // 2、分别找出 age>4，age>5，age>6，age>7 的 animal
-// 3、找出 age>5 且 sex===male 且 species===ca t的 animal
+// 3、找出 age>5 且 sex===male 且 species===cat的 animal
 // 4、根据age、sex、species的值的不同组合筛选animal
-
-
