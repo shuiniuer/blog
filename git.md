@@ -1,6 +1,20 @@
 ## 查看log
 `git log`
 
+## 添加修改到暂存区
+- `git add -A` 或者 `git add -i`
+
+## 提交
+- `git ci -m '<message>'` # message为提交说明
+
+## 从远程分支拉取代码
+- `git pull origin <branch name>`
+
+## 推送到远程分支
+- `git push origin <branch name>` 
+
+## 撤销提交
+
 ## 撤销提交
 - 回退到上一个版本：
 `git reset --hard HEAD^`
