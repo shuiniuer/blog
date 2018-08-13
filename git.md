@@ -41,7 +41,7 @@
 `git push origin --delete <BranchName>`
 
 ## rebase
-git rebase -i origin/master
+`git rebase -i <BranchName>`
 
 ## 标签
 - 查看所有标签：
