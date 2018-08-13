@@ -40,6 +40,9 @@
 - 删除远程分支
 `git push origin --delete <BranchName>`
 
+## rebase
+git rebase -i origin/master
+
 ## 标签
 - 查看所有标签：
 `git tag`
