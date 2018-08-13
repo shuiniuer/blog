@@ -114,3 +114,8 @@
 
 当前用户的Git配置文件放在用户主目录下的一个隐藏文件`.gitconfig`中：
 `cat .gitconfig`
+
+
+## 参考资料
+
+- [Git community book 中文版](http://gitbook.liuhui998.com/index.html)
