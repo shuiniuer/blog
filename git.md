@@ -67,6 +67,17 @@
 `git tag -d <tagname>`
 `git push origin :refs/tags/<tagname>`
 
+## 切换远程仓库
+方式一：
+
+`git remote set-url origin URL` URL为新地址。
+
+方式二：
+
+`git remote rm origin` 删除现有远程仓库 
+
+`git remote add origin URL` 添加新远程仓库
+
 ## 配置
 别名配置：
 
