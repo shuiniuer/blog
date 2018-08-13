@@ -101,3 +101,6 @@ git rebase -i origin/master
 
 当前用户的Git配置文件放在用户主目录下的一个隐藏文件`.gitconfig`中：
 `cat .gitconfig`
+
+
+test1
