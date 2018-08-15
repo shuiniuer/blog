@@ -1,5 +1,5 @@
 const R = require('ramda');
-
+const curry = R.curry;
 let animals = [
 	{name:'duck2', species:'duck', age:2, sex:'male'},
 	{name:'cat1', species:'cat', age:2, sex:'male'},
@@ -14,12 +14,7 @@ let animals = [
 	{name:'rabit3', species:'rabit', age:2, sex:'female'}
 ];
 
-// 1、找出 age>5 的 animal
-// 2、分别找出 age>4，age>5，age>6，age>7 的 animal
-// 3、找出 age>5 且 sex===male 且 species===cat的 animal
-// 4、根据age、sex、species的值的不同组合筛选animal
-
-let judge = R.curry(function(prop, standard, animal){
+let judge = curry(function(prop, standard, animal){
 	if(prop==='age'){
 		return animal[prop] > standard;
 	}else{
@@ -27,9 +22,8 @@ let judge = R.curry(function(prop, standard, animal){
 	}
 });
 
-let femaleDog = R.compose(
-	R.filter(judge('species')('dog')),
-	R.filter(judge('sex')('male'))
-);
+console.log(animals.filter(judge('age')(1)));
+console.log(animals.filter(judge('species')('dog')));
+console.log(animals.filter(judge('sex')('male')));
 
-console.log(femaleDog(animals));
+
