@@ -218,4 +218,4 @@ compose(id, f) == compose(f, id) == f;
 另外范畴学将在应用架构、模拟副作用和保证正确性方面扮演重要角色。
 
 
-## 下一节：[示例应用（flickr）](./flckr.md)
+## 下一节：[示例应用（flickr）](./flickr.md)
