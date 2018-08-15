@@ -1,4 +1,4 @@
-# Javascript函数式编程3：组合（compose）
+# Javascript函数式编程3：compose（组合）
 
 如果一个值要经过多个函数，才能变成另外一个值，就可以把所有中间步骤合并成一个函数，这叫做"组合"（compose）。
 
