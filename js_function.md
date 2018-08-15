@@ -391,7 +391,7 @@ const addEvent = function (elem, type, fn, cature) {
     if (window.addEventListener) {
         elem.addEventListener(type, (e) => fn.call(elem, e), capture);
     } else if (window.attachEvent) {
-        elem.attachEvent('on' + type, (e) => fn.call(elem, e);
+        elem.attachEvent('on' + type, (e) => fn.call(elem, e));
     }
 }
 ```
@@ -406,7 +406,7 @@ const addEvent = (function () {
         };
     } else {
         return (elem, type, fn, capture) => {
-            elem.attachEvent('on' + type, (e) => fn.call(elem, e);
+            elem.attachEvent('on' + type, (e) => fn.call(elem, e));
         };
     }
 })();
@@ -416,9 +416,42 @@ const addEvent = (function () {
 >当我们谈论纯函数的时候，我们说它们接受一个输入返回一个输出。curry 函数所做的正是这样：每传递一个参数调用函数，就返回一个新函数处理剩余的参数。这就是一个输入对应一个输出。<br>
 哪怕输出是另一个函数，它也是纯函数。当然 curry 函数也允许一次传递多个参数，但这只是出于减少 () 的方便。
 
+## 组合（compose）
+如果一个值要经过多个函数，才能变成另外一个值，就可以把所有中间步骤合并成一个函数，这叫做"组合"（compose）。
+![组合](js_function1.png)
+
+上图中，`X`和`Y`之间的变形关系是函数`f`，`Y`和`Z`之间的变形关系是函数`g`，那么`X`和`Z`之间的关系，就是`g`和`f`的合成函数`g·f`。
+
+上图的代码表示如下：
+
+```
+var compose = function(f,g) {
+  return function(x) {
+    return f(g(x));
+  };
+};
+```
+`f`和`g`都是函数，`x`是在它们之间通过“管道”传输的值。使用举例：
+
+```
+var toUpperCase = function(x) { return x.toUpperCase(); };
+var exclaim = function(x) { return x + '!'; };
+var shout = compose(exclaim, toUpperCase);
+
+shout("send in the clowns");
+//=> "SEND IN THE CLOWNS!"
+```
+
+在`compose`的定义中，`g`将先于`f`执行，因此就创建了一个从右到左的数据流。这样做的可读性远远高于嵌套一大堆的函数调用，如果不用组合，`shout`函数将会是这样的：
+
+```
+var shout = function(x){
+  return exclaim(toUpperCase(x));
+};
+```
+
 ## TODO
 
-- 组合（composing）
 - 类型签名（Hindley-Milner）
 - 函子（Functor）
 - Monad Functor

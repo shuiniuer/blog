@@ -1,4 +1,4 @@
-let curry = require('lodash').curry;
+const R = require('ramda');
 
 let animals = [
 	{name:'duck2', species:'duck', age:2, sex:'male'},
@@ -18,3 +18,18 @@ let animals = [
 // 2、分别找出 age>4，age>5，age>6，age>7 的 animal
 // 3、找出 age>5 且 sex===male 且 species===cat的 animal
 // 4、根据age、sex、species的值的不同组合筛选animal
+
+let judge = R.curry(function(prop, standard, animal){
+	if(prop==='age'){
+		return animal[prop] > standard;
+	}else{
+		return animal[prop] === standard;
+	}
+});
+
+let femaleDog = R.compose(
+	R.filter(judge('species')('dog')),
+	R.filter(judge('sex')('male'))
+);
+
+console.log(femaleDog(animals));
