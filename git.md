@@ -56,6 +56,7 @@
 
 ## rebase
 `git rebase -i <BranchName>`
+
 > pick：保留该commit（缩写:p）
 
 > reword：保留该commit，但我需要修改该commit的注释（缩写:r）
@@ -69,6 +70,8 @@
 > exec：执行shell命令（缩写:x）
 
 > drop：我要丢弃该commit（缩写:d）
+
+[rebase 原理](http://gitbook.liuhui998.com/4_2.html)
 
 ## 标签
 - 查看所有标签：

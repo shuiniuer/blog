@@ -416,8 +416,9 @@ const addEvent = (function () {
 >当我们谈论纯函数的时候，我们说它们接受一个输入返回一个输出。curry 函数所做的正是这样：每传递一个参数调用函数，就返回一个新函数处理剩余的参数。这就是一个输入对应一个输出。<br>
 哪怕输出是另一个函数，它也是纯函数。当然 curry 函数也允许一次传递多个参数，但这只是出于减少 () 的方便。
 
-## 组合（compose）
+##  组合（compose）
 如果一个值要经过多个函数，才能变成另外一个值，就可以把所有中间步骤合并成一个函数，这叫做"组合"（compose）。
+
 ![组合](js_function1.png)
 
 上图中，`X`和`Y`之间的变形关系是函数`f`，`Y`和`Z`之间的变形关系是函数`g`，那么`X`和`Z`之间的关系，就是`g`和`f`的合成函数`g·f`。
@@ -442,12 +443,43 @@ shout("send in the clowns");
 //=> "SEND IN THE CLOWNS!"
 ```
 
-在`compose`的定义中，`g`将先于`f`执行，因此就创建了一个从右到左的数据流。这样做的可读性远远高于嵌套一大堆的函数调用，如果不用组合，`shout`函数将会是这样的：
+在`compose`的定义中，`g`将先于`f`执行，因此就创建了一个**从右到左**的数据流。这样做的可读性远远高于嵌套一大堆的函数调用，如果不用组合，`shout`函数将会是这样的：
 
 ```
 var shout = function(x){
   return exclaim(toUpperCase(x));
 };
+```
+让代码从右向左运行，而不是由内而外运行。一个与顺序相关的例子：
+
+```
+var head = function(x) { return x[0]; };
+var reverse = reduce(function(acc, x){ return [x].concat(acc); }, []);
+var last = compose(head, reverse);
+
+last(['jumpkick', 'roundhouse', 'uppercut']);
+//=> uppercut
+reverse反转列表，head 取列表中的第一个元素，结果是取列表的最后一个元素
+```
+组合的概念直接来自于数学，所有有的组合都需满足***结合律（associativity）***这个特性。
+
+![结合律](js_function2.png)
+
+```
+// 结合律（associativity）
+var associative = compose(f, compose(g, h)) == compose(compose(f, g), h);
+// true
+```
+
+符合结合律意味着并不关心你是把`g`和`h`分到一组，还是把`f`和`g`分到一组。
+
+```
+var toUpperCase = function(x) { return x.toUpperCase(); };
+var exclaim = function(x) { return x + '!'; };
+var shout = compose(exclaim, toUpperCase);
+var head = function(x) { return x[0]; };
+var reverse = reduce(function(acc, x){ return [x].concat(acc); }, []);
+
 ```
 
 ## TODO
