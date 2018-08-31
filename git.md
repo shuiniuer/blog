@@ -132,6 +132,12 @@
 当前用户的Git配置文件放在用户主目录下的一个隐藏文件`.gitconfig`中：
 `cat .gitconfig`
 
+## 账户
+
+- 查看当前git用户名： `git config user.name`
+- 查看当前git邮箱： `git config user.email`
+- 切换git用户名: `git config --global user.name "YOURUSERNAME"`
+- 切换git邮箱： `git config --global user.email "YOUREMAIL"`
 
 ## 参考资料
 
