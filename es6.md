@@ -77,9 +77,9 @@
     } 
 ```
 
-- 拓展的对象功能
+## 拓展的对象功能
 
-对象初始化简写
+- 对象初始化简写
 
 ```
     function people(name, age) {
@@ -98,7 +98,7 @@
     }
 ```
 
-使用`Object.assign()`方法来实现浅复制
+- 使用`Object.assign()`方法来实现浅复制
 
 `Object.assign()`可以把任意多个源对象自身可枚举的属性拷贝给目标对象，然后返回目标对象。第一参数即为目标对象。在实际项目中，我们为了不改变源对象。一般会把目标对象传为`{}`
 
@@ -119,7 +119,7 @@
     Object.assign({}, objC, objA, objB)
 ```
 
-- 解构
+## 解构
 
 数组和对象是JS中最常用也是最重要表示形式。为了简化提取信息，ES6新增了解构，这是将一个数据结构分解为更小的部分的过程
 
@@ -138,9 +138,7 @@
     console.log(second) //'blue'
 
 
-
-    // 用 ES6 重构一下代码
-
+    /* 用 ES6 重构一下代码 */
     // 第一题
     var jsonParse = require('body-parser').jsonParse
 
@@ -155,9 +153,9 @@
     const { body, body: { username, password } } = request
 ```
 
-- Spread Operator 展开运算符
+## Spread Operator 展开运算符
 
-组装对象或者数组
+- 组装对象或者数组
 
 ```
     //数组
@@ -171,7 +169,7 @@
     console.log(alphabets) //{ "fist": "a", "second": "b", "third": "c"}
 ```
 
-获取数组或者对象的某几项
+- 获取数组或者对象的某几项
 
 ```
     //数组
@@ -189,7 +187,7 @@
     console.log(rest) //{"address": "peking", "age": 19, "gender": "female"}
 ```
 
-组合新的 Object；如果有重复的属性名，右边覆盖左边
+- 组合新的 Object；如果有重复的属性名，右边覆盖左边
 
 ```
     const first = {
@@ -204,7 +202,8 @@
     const total = { ...first, ...second }
     console.log(total) // { a: 1, b: 2, c: 3, d: 4 }
 ```
-7.import 和 export
+
+## import 和 export
 
 import导入模块、export导出模块
 
@@ -231,15 +230,15 @@ export class App extend Component {}
 
 导入的时候有没有大括号的区别总结：
 
-1.当用export default people导出时，就用 import people 导入（不带大括号）；
+1. 当用export default people导出时，就用 import people 导入（不带大括号）；
 
-2.一个文件里，有且只能有一个export default，但可以有多个export；
+2. 一个文件里，有且只能有一个export default，但可以有多个export；
 
-3.当用export name 时，就用import { name }导入（记得带上大括号）；
+3. 当用export name 时，就用import { name }导入（记得带上大括号）；
 
-4.当一个文件里，既有一个export default people, 又有多个export name 或者 export age时，导入就用 import people, { name, age }；
+4. 当一个文件里，既有一个export default people, 又有多个export name 或者 export age时，导入就用 import people, { name, age }；
 
-5.当一个文件里出现n多个 export 导出很多模块，导入时除了一个一个导入，也可以用import * as example。
+5. 当一个文件里出现n多个 export 导出很多模块，导入时除了一个一个导入，也可以用import * as example。
 
 ## Promise
 
