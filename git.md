@@ -22,6 +22,10 @@
 - 回退到某一个版本：
 `git reset --hard <版本号>`
 
+`git reset –soft <版本号>`
+
+`git push origin master –force`
+
 ## 撤销修改
 - 修改的文件未加入到暂存区，撤销修改：
 `git checkout -- <file>`

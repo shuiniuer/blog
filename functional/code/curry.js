@@ -26,4 +26,3 @@ console.log(animals.filter(judge('age')(1)));
 console.log(animals.filter(judge('species')('dog')));
 console.log(animals.filter(judge('sex')('male')));
 
-

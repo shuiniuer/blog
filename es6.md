@@ -11,11 +11,11 @@
 - 模板字符串
 
 ```
-	// ${} 引用表达式
-	const name = 'lux'
-	console.log(`hello ${name}`) //hello lux
+    // ${} 引用表达式
+    const name = 'lux'
+    console.log(`hello ${name}`) //hello lux
 
-	// 多行
+    // 多行
     const template = `<div>
         <span>hello world</span>
     </div>`
@@ -121,7 +121,7 @@
 
 ## 解构
 
-数组和对象是JS中最常用也是最重要表示形式。为了简化提取信息，ES6新增了解构，这是将一个数据结构分解为更小的部分的过程
+- 数组和对象是JS中最常用也是最重要表示形式。为了简化提取信息，ES6新增了解构，这是将一个数据结构分解为更小的部分的过程
 
 ```
     //对象
@@ -205,7 +205,7 @@
 
 ## import 和 export
 
-import导入模块、export导出模块
+- import导入模块、export导出模块
 
 ```
 //导入默认
@@ -228,7 +228,7 @@ export default App
 export class App extend Component {}
 ```
 
-导入的时候有没有大括号的区别总结：
+- 导入的时候有没有大括号的区别总结：
 
 1. 当用export default people导出时，就用 import people 导入（不带大括号）；
 
