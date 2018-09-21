@@ -13,19 +13,29 @@
 ## 推送到远程分支
 - `git push origin <branch name>` 
 
-## 撤销提交
 
 ## 撤销提交
 - 回退到上一个版本：
 `git reset --hard HEAD^`
 
 - 回退到某一个版本：
-`git reset --hard <版本号>`
+`git reset --hard <commit版本号>`
 
-`git reset –soft <版本号>`
+`git reset –soft <commit版本号>`
 
-`git push origin master –force`
+`git push origin master --force`
 
+## 使用revert撤销提交
+- 撤销前一次
+`git revert HEAD `
+
+- 撤销前前一次
+`git revert HEAD^`
+
+- 撤销到指定版本
+`git revert commit版本号`
+
+```
 ## 撤销修改
 - 修改的文件未加入到暂存区，撤销修改：
 `git checkout -- <file>`

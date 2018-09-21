@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+	<title>b1.a.com</title>
+</head>
+<body>
+	<h2>b1.a.com</h2>
+	 <iframe src="http://b2.a.com/b2.html" id="iframe"></iframe>
+	 
+</body>
+<script type="text/javascript">
+	
+	window.name = 'b1_set';
+
+	var ifr = document.getElementById('iframe');
+
+	setTimeout(function(){
+		ifr.src = 'http://c.com/c.html';
+	},1000);
+
+
+	setTimeout(function(){
+		ifr.src = 'http://b2.a.com/b2.html';
+	},2000);
+	
+</script>
+</html>

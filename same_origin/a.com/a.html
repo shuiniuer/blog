@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<head>
+	<title>a.com</title>
+</head>
+<body>
+	<h2>a.com</h2>
+	 <iframe src="http://b1.a.com/b1.html"></iframe>
+</body>
+<script type="text/javascript">
+	//document.domain="a.com";
+	var ifr = document.getElementsByTagName('iframe')[0].contentWindow.document
+
+	console.log(ifr.getElementsByTagName('body'));
+</script>
+</html>
