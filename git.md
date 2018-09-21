@@ -35,7 +35,6 @@
 - 撤销到指定版本
 `git revert commit版本号`
 
-```
 ## 撤销修改
 - 修改的文件未加入到暂存区，撤销修改：
 `git checkout -- <file>`
