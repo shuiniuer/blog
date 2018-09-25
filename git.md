@@ -41,9 +41,7 @@ git reset --hard HEAD^
 
 回退到某一个版本：
 git reset --hard <commit版本号>
-
 git reset –soft <commit版本号>
-
 git push origin master --force
 ```
 
@@ -57,7 +55,7 @@ git revert HEAD
 git revert HEAD^
 
 撤销到指定版本
-git revert commit版本号
+git revert <commit版本号>
 ```
 
 ## 撤销修改
@@ -141,9 +139,11 @@ git rebase -i <BranchName>
 查看所有标签：
 git tag
 
-创建标签：
+创建标签（当前提交）：
 git tag <tagname>
 
+
+创建标签（指定提交）：
 git tag <tagname> <commit id>
 
 创建指定信息的标签：
@@ -178,15 +178,10 @@ git remote add origin URL //添加新远程仓库
 
 ```
 别名配置：
-
 git config --global alias.st status
-
 git config --global alias.co checkout
-
 git config --global alias.ci commit
-
 git config --global alias.br branch
-
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 显示最后一次提交信息：
