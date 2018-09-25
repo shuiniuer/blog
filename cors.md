@@ -1,4 +1,4 @@
-# 跨域资源共享 CORS 详细介绍
+# 跨域资源共享CORS详解
 
 CORS是一个W3C标准，全称是"跨域资源共享"（Cross-origin resource sharing）。
 
