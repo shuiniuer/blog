@@ -1,10 +1,10 @@
-## webpack - babel配置
+# webpack - babel配置
 
 babel是一个javascript编译器，是前端开发中的一个利器。它突破了浏览器实现es标准的限制，使我们在开发中可以使用最新的javascript语法。
 
 通过构建和babel，可以使用最新js语法进行开发，最后自动编译成用于浏览器或node环境的代码。
 
-## webpack中使用babel
+### webpack中使用babel
 
 配合`webpack`使用`babel`前，需要首先使用`npm init`初始化一个项目，`npm install --save-dev webpack`安装webpack。
 
@@ -79,7 +79,7 @@ module: {
 }
 ```
 
-## babel-polifill插件
+### babel-polifill插件
 
 在上面的babel配置中，babel只是将一些es6，es7-8的语法转换成符合目标的js代码，但是如果我们使用一些特性或方法，比如Generator, Set, 或者一些方法。babel并不能转换为低版本浏览器识别的代码。这时就需要babel-polifill。
 
@@ -107,7 +107,7 @@ entry: ["babel-polifill", "./app.js"]
 
 更多细节参考[babel-polifill](https://babeljs.cn/docs/usage/polyfill/)。
 
-## runtime-transform插件
+### runtime-transform插件
 
 runtime transform也是一个插件，它与polifill有些类似，但它不污染全局变量，所以经常用于框架开发。
 
