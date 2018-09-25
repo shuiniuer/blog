@@ -36,6 +36,7 @@ RFC2616规定的47种http报文首部字段中与缓存相关的字段。
 
 ### cache-control
 规定浏览器如何缓存某个响应以及缓存多长时间：
+
 ![cache-control](./htmlcache.png)
 
 ```
