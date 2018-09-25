@@ -79,7 +79,7 @@ git cherry-pick <commit-id>
 git cherry-pick -x <commit_id>
 
 一个开始和结束的commit进行操作：
-git cherry_pick <start-commit-id>…<end-commit-id> //不包含<start-commit-id>
+git cherry-pick <start-commit-id>…<end-commit-id> //不包含<start-commit-id>
 git cherry-pick <start-commit-id>^...<end-commit-id> //包含<start-commit-id>
 
 ```
