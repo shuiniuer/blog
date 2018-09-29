@@ -225,7 +225,7 @@ import {name, age} from './example'
 export default App
 
 // 部分导出
-export class App extend Component {}
+export App
 ```
 
 - 导入的时候有没有大括号的区别总结：
@@ -242,4 +242,241 @@ export class App extend Component {}
 
 ## Promise
 
+Promise是一个构造函数，自己身上有all、reject、resolve这几个眼熟的方法，原型上有then、catch等同样很眼熟的方法。
+
+- 基础用法：
+
+```
+var p = new Promise(function(resolve, reject){
+    //做一些异步操作
+    setTimeout(function(){
+        console.log('执行完成');
+        resolve('随便什么数据');
+    }, 2000);
+});
+
+p.then(function(data){
+    console.log(data);
+});
+```
+
+- 使用Promise的时候一般是包裹在一个函数中，在需要的时候去运行这个函数：
+
+```
+function runAsync(){
+    var p = new Promise(function(resolve, reject){
+        //做一些异步操作
+        setTimeout(function(){
+            console.log('执行完成');
+            resolve('随便什么数据');
+        }, 2000);
+    });
+    return p;            
+}
+
+runAsync().then(function(data){
+    console.log(data);
+    //后面可以用传过来的数据做些其他操作
+    //......
+});
+```
+
+- 链式操作的用法
+
+```
+// runAsync1
+function runAsync1(){
+    var p = new Promise(function(resolve, reject){
+        //做一些异步操作
+        setTimeout(function(){
+            console.log('异步任务1执行完成');
+            resolve('随便什么数据1');
+        }, 1000);
+    });
+    return p;            
+}
+
+// runAsync2
+function runAsync2(){
+    var p = new Promise(function(resolve, reject){
+        //做一些异步操作
+        setTimeout(function(){
+            console.log('异步任务2执行完成');
+            resolve('随便什么数据2');
+        }, 2000);
+    });
+    return p;            
+}
+
+// runAsync3
+function runAsync3(){
+    var p = new Promise(function(resolve, reject){
+        //做一些异步操作
+        setTimeout(function(){
+            console.log('异步任务3执行完成');
+            resolve('随便什么数据3');
+        }, 2000);
+    });
+    return p;            
+}
+
+// 调用
+runAsync1()
+.then(function(data){
+    console.log(data);
+    return runAsync2();
+})
+.then(function(data){
+    console.log(data);
+    return runAsync3();
+})
+.then(function(data){
+    console.log(data);
+});
+
+// 执行结果
+// 异步任务1执行完成
+// 随便什么数据1
+// 异步任务2执行完成
+// 随便什么数据2
+// 异步任务3执行完成
+// 随便什么数据3
+
+// 在then方法中，可以直接return数据而不是Promise对象，在后面的then中就可以接收到数据了，我们把上面的代码修改成这样：
+
+runAsync1()
+.then(function(data){
+    console.log(data);
+    return runAsync2();
+})
+.then(function(data){
+    console.log(data);
+    return '直接返回数据';  //这里直接返回数据
+})
+.then(function(data){
+    console.log(data);
+});
+// 执行结果
+// 异步任务1执行完成
+// 随便什么数据1
+// 异步任务2执行完成
+// 随便什么数据2
+// 直接返回数据
+```
+
+- reject的用法
+
+```
+function getNumber(){
+    var p = new Promise(function(resolve, reject){
+        //做一些异步操作
+        setTimeout(function(){
+            var num = Math.ceil(Math.random()*10); //生成1-10的随机数
+            if(num<=5){
+                resolve(num);
+            }
+            else{
+                reject('数字太大了');
+            }
+        }, 2000);
+    });
+    return p;            
+}
+
+getNumber()
+.then(
+    function(data){
+        console.log('resolved');
+        console.log(data);
+    }, 
+    function(reason, data){
+        console.log('rejected');
+        console.log(reason);
+    }
+);
+```
+
+- catch的用法
+
+```
+// 指定reject的回调
+getNumber()
+.then(function(data){
+    console.log('resolved');
+    console.log(data);
+})
+.catch(function(reason){
+    console.log('rejected');
+    console.log(reason);
+});
+
+// 另外一个作用：在执行resolve的回调（也就是then中的第一个参数）时，如果抛出异常了（代码出错了），那么并不会报错卡死js，而是会进到这个catch方法中
+getNumber()
+.then(function(data){
+    console.log('resolved');
+    console.log(data);
+    console.log(somedata); //此处的somedata未定义
+})
+.catch(function(reason){
+    console.log('rejected');
+    console.log(reason);
+});
+```
+
+- all的用法
+
+```
+// 并行执行异步操作，并且在所有异步操作执行完后才执行回调
+Promise
+.all([runAsync1(), runAsync2(), runAsync3()])
+.then(function(results){
+    console.log(results);
+});
+```
+
+- race的用法
+
+```
+// 只要有一个异步操作执行完就执行回调
+Promise
+.race([runAsync1(), runAsync2(), runAsync3()])
+.then(function(results){
+    console.log(results);
+});
+```
+
+- race使用实例设置图片超时操作
+
+```
+//请求某个图片资源
+function requestImg(){
+    var p = new Promise(function(resolve, reject){
+        var img = new Image();
+        img.onload = function(){
+            resolve(img);
+        }
+        img.src = 'xxxxxx';
+    });
+    return p;
+}
+
+//延时函数，用于给请求计时
+function timeout(){
+    var p = new Promise(function(resolve, reject){
+        setTimeout(function(){
+            reject('图片请求超时');
+        }, 5000);
+    });
+    return p;
+}
+
+Promise
+.race([requestImg(), timeout()])
+.then(function(results){
+    console.log(results);
+})
+.catch(function(reason){
+    console.log(reason);
+});
+```
 ## Generators
