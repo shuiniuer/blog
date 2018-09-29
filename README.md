@@ -7,4 +7,4 @@
 - [babel在webpack中的使用](./babel-webpack.md)
 - [浏览器同源策略详解](./same-origin-policy.md)
 - [跨域资源共享cors详细介绍](./cors.md)
-- [与缓存相关的http头部详解](./front_cache/cache.md)
+- [http缓存详细介绍](./front_cache/cache.md)
