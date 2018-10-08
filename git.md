@@ -57,6 +57,7 @@ git revert HEAD^
 撤销到指定版本
 git revert <commit版本号>
 ```
+[revert原理](http://blog.psjay.com/posts/git-revert-merge-commit/)
 
 ## 撤销修改
 
