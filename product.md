@@ -1,7 +1,5 @@
 ## UI设计作品
 
-- [尚拉夫庄园红酒平台及官网](http://hongjiu.jingqiweb.com/home/index/index.html)（PC打开为官网，手机打开为商城）
-
 - [紫薇品牌官网](http://www.konation.com.cn/m/index.php)
 
 - [紫薇商学院平台](http://ziwei.jingqiweb.com/#/home)
@@ -11,6 +9,8 @@
 - [瑞美科技官网](http://www.rmckj.com/mobile/)
 
 - [东业合伙人平台](http://www.dongyehhr.com/index.php/Home/Index/parklist)（通过微信打开）
+
+- [尚拉夫庄园红酒平台及官网](http://hongjiu.jingqiweb.com/home/index/index.html)（PC打开为官网，手机打开为商城）
 
 ## H5作品
 
