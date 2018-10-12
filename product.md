@@ -10,8 +10,6 @@
 
 - [东业合伙人平台](http://www.dongyehhr.com/index.php/Home/Index/parklist)（通过微信打开）
 
-- [尚拉夫庄园红酒平台及官网](http://hongjiu.jingqiweb.com/home/index/index.html)（PC打开为官网，手机打开为商城）
-
 ## H5作品
 
 - [艺创小镇H5](https://filea7cd5eb47e42.iamh5.cn/v3/idea/AJEqTbnT)
