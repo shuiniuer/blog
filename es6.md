@@ -723,7 +723,3 @@ var show = showNumbers();
 
 [...show] // [1, 2, length: 2]
 ```
-
-[1](https://segmentfault.com/a/1190000008677697)
-
-[2](https://segmentfault.com/a/1190000011526612)
