@@ -22,6 +22,7 @@
 > 重复步骤1~3，直到排序完成。
 
 3. 动图演示
+
 ![bubbleSort](1.gif)
 
 4. JavaScript代码实现
@@ -59,6 +60,7 @@ function bubbleSort(arr){
 >该趟排序从当前无序区中选出关键字最小的记录 R[k]，将它与无序区的第1个记录R交换，使R[1..i]和R[i+1..n)分别变为记录个数增加1个的新有序区和记录个数减少1个的新无序区；n-1趟结束，数组有序化了。
 
 3. 动图演示
+
 ![selectionSort](2.gif)
 
 4. JavaScript代码实现
@@ -106,6 +108,7 @@ function selectionSort(array) {
 > 重复步骤2~5。
 
 3. 动图演示
+
 ![insertionSort](3.gif)
 
 4. JavaScript代码实现
@@ -139,6 +142,7 @@ function insertionSort(array) {
 > 递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。
 
 3. 动图演示
+
 ![quickSort](4.gif)
 
 4. JavaScript代码实现
@@ -192,6 +196,7 @@ var quickSort = function(arr) {
 > 将两个排序好的子序列合并成一个最终的排序序列。
 
 3. 动图演示
+
 ![quickSort](5.gif)
 
 4. JavaScript代码实现
@@ -248,6 +253,7 @@ function merge(array, p, q, r) {
 > 反向填充目标数组：将每个元素i放在新数组的第C(i)项，每放一个元素就将C(i)减去1。
 
 3. 动图演示
+
 ![countingSort](6.gif)
 
 4. JavaScript代码实现
@@ -287,7 +293,9 @@ function countingSort(array) {
 > 由于交换后新的堆顶R[1]可能违反堆的性质，因此需要对当前无序区(R1,R2,......Rn-1)调整为新堆，然后再次将R[1]与无序区最后一个元素交换，得到新的无序区(R1,R2....Rn-2)和新的有序区(Rn-1,Rn)。不断重复此过程直到有序区的元素个数为n-1，则整个排序过程完成。
 
 3. 动图演示
+
 ![heapSort](7.gif)
+
 4. JavaScript代码实现
 
 ```
