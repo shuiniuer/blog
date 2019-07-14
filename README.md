@@ -1,5 +1,5 @@
 # blog
-个人整理总结的`前端开发`相关的知识点。
+个人整理总结的`前端开发`相关知识点。
 
 - [常用排序算法之Javascript实现](./algorithm/sort.md)
 - [Javascript函数式编程](./functional/curry.md)
